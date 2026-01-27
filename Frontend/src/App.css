@@ -1,0 +1,360 @@
+/* =========================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================= */
+:root {
+  --primary-color: #ff0055;
+  --primary-hover: #d40045;
+  --bg-color: #1a1a2e;
+  --card-bg: #ffffff;
+  --text-main: #333;
+  --text-light: #666;
+  --border-radius: 8px;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.6;
+  /* Optional: Subtle background gradient */
+  background-image: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================================
+   2. NAVBAR STYLING (RESPONSIVE)
+   ========================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%; /* 5% padding for responsiveness */
+  background-color: rgba(26, 26, 46, 0.95); /* Slightly transparent */
+  backdrop-filter: blur(10px);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-brand a {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(to right, #ff0055, #ff4d4d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+/* Desktop Menu */
+.nav-links {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #e0e0e0;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Hamburger Icon (Hidden on Desktop) */
+.menu-icon {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+}
+
+/* Buttons inside Navbar */
+.nav-btn {
+  border: 1px solid var(--primary-color);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.nav-btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-logout {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* =========================================
+   3. MOBILE MENU (MEDIA QUERY)
+   ========================================= */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block; /* Show hamburger */
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: #16213e;
+    padding: 20px 0;
+    gap: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* Animation hidden state */
+    transform: translateY(-20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .nav-links.active {
+    /* Animation visible state */
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+  }
+
+  .nav-links a, .nav-links button {
+    font-size: 1.2rem;
+    width: 100%;
+    display: block;
+  }
+}
+
+/* =========================================
+   4. LAYOUT & CONTAINERS
+   ========================================= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* General Card Style */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   5. JOB GRID SYSTEM (RESPONSIVE)
+   ========================================= */
+.job-grid {
+  display: grid;
+  /* Auto-fill: Fit as many 300px cards as possible */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.job-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 5px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.job-card:hover {
+  border-left: 5px solid var(--primary-color);
+}
+
+.job-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.job-tag {
+  display: inline-block;
+  background: #f0f2f5;
+  color: #555;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+/* =========================================
+   6. FORMS & INPUTS
+   ========================================= */
+input, select, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0 20px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 0, 85, 0.1);
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Primary Button */
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background 0.3s;
+  text-align: center;
+  width: 100%; /* Default to full width for mobile friendliness */
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Password Eye Icon Positioning */
+.password-wrapper {
+  position: relative;
+}
+
+.password-icon {
+  position: absolute;
+  right: 15px;
+  top: 42px; /* Adjust based on label height */
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+/* =========================================
+   7. MODAL STYLING
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 20px; /* Prevent touching edges on mobile */
+}
+
+.modal-content {
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh; /* Scroll if too tall */
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: var(--primary-color);
+}
+
+.modal-header h2 {
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+.modal-meta {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+/* =========================================
+   8. FILTER SECTION (JOB SEARCH)
+   ========================================= */
+.filter-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.filter-container input, 
+.filter-container select {
+  margin-bottom: 0; /* Override default margin */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
